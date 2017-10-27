@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Player Activity -->
+    <style name="FeedPlayerTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/feedPrimary</item>
+        <item name="colorPrimaryDark">@color/feedPrimaryDark</item>
+        <item name="colorAccent">@color/feedAccent</item>
+        <item name="android:textColor">@color/feedText</item>
+    </style>
+
+    <style name="FeedPlayerToolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </style>
+
+    <style name="FeedPlayerTextAppearance" parent="TextAppearance.AppCompat.Body1">
+
+    </style>
+
+    <style name="FeedPoweredByTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@android:color/white</item>
+    </style>
+
+</resources>

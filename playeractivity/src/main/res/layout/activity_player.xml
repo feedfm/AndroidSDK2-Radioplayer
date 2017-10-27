@@ -1,0 +1,37 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/FeedPlayerTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/FeedPlayerToolbar"
+            android:background="?attr/colorPrimary"
+            />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/radioTabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            android:background="@color/feedBackground"
+            app:tabIndicatorColor="?attr/colorAccent"
+            app:tabTextColor="@color/feedText"
+            app:tabSelectedTextColor="@color/feedTextBright"
+            />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/playerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+</LinearLayout>

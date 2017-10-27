@@ -1,0 +1,28 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fm.feed.android.radioplayer.tabbed">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <activity
+            android:name=".PlayerActivity"
+            android:label="Radio"
+            android:launchMode="singleTop"
+            android:theme="@style/FeedPlayerTheme"
+            android:exported="true"
+            />
+            <!-- android:parentActivityName=".MainActivity" -->
+
+        <activity
+            android:name=".PoweredByFeedActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:parentActivityName=".PlayerActivity"
+            />
+
+    </application>
+
+</manifest>

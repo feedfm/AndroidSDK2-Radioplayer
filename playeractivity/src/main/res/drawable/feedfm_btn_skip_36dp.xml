@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false"                             android:drawable="@drawable/feedfm_ic_skip_36dp_50op"/>
+    <item android:state_enabled="true" android:state_pressed="true" android:drawable="@drawable/feedfm_ic_skip_36dp"/>
+    <item android:state_enabled="true"                              android:drawable="@drawable/feedfm_ic_skip_36dp"/>
+</selector>

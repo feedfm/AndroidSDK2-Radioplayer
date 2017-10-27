@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PlayerActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="play_pause_button">play pause button</string>
+    <string name="skip_button">skip button</string>
+    <string name="dislike_button">dislike button</string>
+    <string name="like_button">like button</string>
+    <string name="close_button">close button</string>
+    <string name="feed_fm_logo">feed fm logo</string>
+    <string name="disclaimer">There is no affiliation, connection, association or endorsement of the products, goods, or services displayed on this page by the copyright owners, featured recording artists and authors of the sound recordings (and the musical works embodied therein) transmitted through the Feed.fm player.</string>
+</resources>

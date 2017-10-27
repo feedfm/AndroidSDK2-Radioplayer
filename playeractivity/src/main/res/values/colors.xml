@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="feedTextBright">#ffffff</color>
+    <color name="feedText">#e8e8e8</color>
+    <color name="feedBackground">#000000</color>
+    <color name="feedPrimary">#006586</color>
+    <color name="feedPrimaryDark">#000000</color>
+    <color name="feedAccent">#a8e000</color>
+</resources>

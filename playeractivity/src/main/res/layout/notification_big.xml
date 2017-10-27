@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="132dp"
+    android:background="@android:color/black"
+    >
+
+    <ImageView
+        android:id="@+id/notification_icon"
+        android:layout_width="132dp"
+        android:layout_height="132dp"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="132dp"
+        android:layout_height="match_parent"
+        android:indeterminate="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/notification_track_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="148dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="6dp"
+        android:textColor="@android:color/white"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="this is the track title!"
+        />
+
+    <TextView
+        android:id="@+id/notification_track_artist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="148dp"
+        android:layout_marginStart="148dp"
+        android:layout_below="@id/notification_track_title"
+        android:textColor="@android:color/white"
+        android:text="this is the track artist!"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textSize="12dp"
+        />
+
+    <TextView
+        android:id="@+id/notification_track_release"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="148dp"
+        android:layout_marginStart="148dp"
+        android:layout_below="@id/notification_track_artist"
+        android:textColor="@android:color/white"
+        android:text="this is the track release!"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textSize="12dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/media_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="148dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        >
+
+        <ImageButton
+            android:id="@+id/dislike_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/dislike_button"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="24dp"
+            android:text=""/>
+
+        <ImageButton
+            android:id="@+id/like_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/like_button"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="24dp"
+            android:text=""/>
+
+        <ImageButton
+            android:id="@+id/play_pause_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/play_pause_button"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="24dp"
+            android:text=""/>
+
+        <ImageButton
+            android:id="@+id/skip_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/like_button"
+            />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/media_actions"
+        android:layout_marginLeft="132dp"
+        android:layout_marginStart="132dp"
+        android:id="@+id/action_divider"
+        android:background="@android:color/darker_gray" />
+
+</RelativeLayout>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/controlsContainer"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/backgroundImageView"
+        android:scaleType="centerCrop"
+        />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_above="@+id/controlsContainer"
+        android:layout_alignParentLeft="true"
+        android:progress="50"
+        android:max="100"
+        android:id="@+id/progressBar"
+        android:progressDrawable="@drawable/feedfm_progress_bar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        />
+
+    <LinearLayout
+        android:id="@+id/controlsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="204dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical"
+        android:background="@color/feedBackground"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- display when station is not active -->
+            <RelativeLayout
+                android:id="@+id/tuneInView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                >
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentTop="true"
+                    android:textAppearance="@style/FeedPlayerTextAppearance"
+                    android:padding="20dp"
+                    android:text="Tune In!"
+                    android:textSize="17sp"
+                    />
+
+                <ImageButton
+                    android:id="@+id/startButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/description"
+                    android:src="@drawable/feedfm_ic_play_36dp"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:scaleType="center"
+                    android:background="@android:color/transparent"
+                    />
+
+            </RelativeLayout>
+
+            <!-- display when we're waiting for music -->
+            <RelativeLayout
+                android:id="@+id/tuningView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"
+                    android:indeterminateTint="?attr/colorAccent"
+                    />
+
+            </RelativeLayout>
+
+            <!-- display when we're playing music -->
+            <LinearLayout
+                android:id="@+id/playerControlsView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible"
+                >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/elapsedTextView"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/FeedPlayerTextAppearance"
+                        android:textSize="12sp"
+                        android:gravity="start"
+                        />
+
+                    <TextView
+                        android:id="@+id/remainingTextView"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/FeedPlayerTextAppearance"
+                        android:textSize="12sp"
+                        android:gravity="end"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/trackText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textAppearance="@style/FeedPlayerTextAppearance"
+                    android:gravity="center"
+                    android:text="track name"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/artistText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="26dp"
+                    android:textAppearance="@style/FeedPlayerTextAppearance"
+                    android:gravity="center"
+                    android:text="artist name"
+                    android:textSize="12dp"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:measureWithLargestChild="true"
+                    >
+
+                    <ImageButton
+                        android:id="@+id/dislikeButton"
+                        android:layout_width="36dp"
+                        android:layout_marginRight="27dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/feedfm_btn_thumbsdown_36dp"
+                        android:scaleType="fitCenter"
+                        android:background="@android:color/transparent"
+                        />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="25dp"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/likeButton"
+                        android:layout_width="36dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginRight="22dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/feedfm_btn_thumbsup_36dp"
+                        android:scaleType="fitCenter"
+                        android:background="@android:color/transparent"
+                        />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="25dp"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/playButton"
+                        android:layout_width="36dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/feedfm_ic_play_36dp"
+                        android:scaleType="fitCenter"
+                        android:background="@android:color/transparent"
+                        />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="36dp"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/skipButton"
+                        android:layout_width="36dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/feedfm_btn_skip_36dp"
+                        android:scaleType="fitCenter"
+                        android:background="@android:color/transparent"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/powered_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            android:text="POWERED BY FEED.FM"
+            android:textSize="10dp"
+            android:padding="2dp"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
