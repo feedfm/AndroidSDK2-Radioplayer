@@ -463,11 +463,7 @@ public class PlayerFragment extends Fragment {
         if (bgUrl != null && mBackgroundImageView != null) {
 
             Glide.with(this).load(bgUrl).centerCrop().into(mBackgroundImageView);
-            try {
-                //mPlayer.setArtwork(Glide.with(this).load(bgUrl).asBitmap().into(-1,-1).get());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
         } else if(mBackgroundImageView != null){
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.default_station_background);
 
@@ -485,7 +481,6 @@ public class PlayerFragment extends Fragment {
         }
 
         if (bgUrl != null) {
-            final String bgRef  = bgUrl;
 
             Glide.with(this).load(bgUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
                 @Override

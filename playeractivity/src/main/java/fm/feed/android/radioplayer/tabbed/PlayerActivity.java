@@ -330,7 +330,7 @@ public class PlayerActivity extends AppCompatActivity implements PlayerFragment.
         startActivity(ai);
     }
 
-    public static Station getStationWithName(String name, List<Station> stationList)
+    public static @Nullable Station getStationWithName(String name, List<Station> stationList)
     {
         for (Station station: stationList)
         {
