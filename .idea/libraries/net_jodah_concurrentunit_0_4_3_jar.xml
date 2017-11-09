@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="net.jodah:concurrentunit:0.4.3@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.jodah/concurrentunit/0.4.3/256a6ffbb41609bf313342b2329b8f21d0c632e5/concurrentunit-0.4.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.jodah/concurrentunit/0.4.3/cbce2b65fca63f079598ca74c25e28a217b4e02/concurrentunit-0.4.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

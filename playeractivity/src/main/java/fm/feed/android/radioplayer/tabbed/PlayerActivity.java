@@ -298,7 +298,7 @@ public class PlayerActivity extends AppCompatActivity implements PlayerFragment.
         Intent ai = new Intent(getIntent());
         ai.putExtra(EXTRA_DEFAULT_STATION, station.getName());
         ai.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, ai, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, ai, PendingIntent.FLAG_CANCEL_CURRENT);
         mPlayer.setPendingIntent(pi);
     }
 
