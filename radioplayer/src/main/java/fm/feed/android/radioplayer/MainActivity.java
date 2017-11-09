@@ -4,13 +4,13 @@ package fm.feed.android.radioplayer;
  * Copyright Feed Media, 2016
  */
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         configureRadio();
     }
 
-
+    @SuppressLint("SetTextI18n")
     private void configureRadio() {
         Button openPlayer = (Button) findViewById(R.id.openPlayerButton);
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button openHidden = (Button) findViewById(R.id.openHiddenButton);
+        Button openHidden = findViewById(R.id.openHiddenButton);
 
         openHidden.setOnClickListener(new View.OnClickListener() {
                                          @Override
@@ -71,39 +71,24 @@ public class MainActivity extends AppCompatActivity {
 
         // if we want, we can just pull up a specific list of stations to display
 
-        Button openJustHidden = (Button) findViewById(R.id.openJustHiddenButton);
+        Button openJustHidden = findViewById(R.id.openJustHiddenButton);
 
         openJustHidden.setOnClickListener(new View.OnClickListener() {
                                          @Override
                                          public void onClick(View v) {
                  // start the player and show only the station named "Promo"
                  Intent ai = new Intent(MainActivity.this, PlayerActivity.class);
-
                  ArrayList<String> stations = new ArrayList<String>();
                  stations.add("Hidden Station");
                  ai.putStringArrayListExtra(PlayerActivity.EXTRA_VISIBLE_STATION_LIST, stations);
-
                  ai.putExtra(PlayerActivity.EXTRA_PARENT_ACTIVITY, new Intent(MainActivity.this, MainActivity.class));
-
                  startActivity(ai);
              }
          });
 
         // make buttons visible if radio is available
 
-        FeedPlayerService.getInstance(new FeedAudioPlayer.AvailabilityListener() {
-            @Override
-            public void onPlayerAvailable(FeedAudioPlayer feedAudioPlayer) {
 
-                findViewById(R.id.openButtons).setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onPlayerUnavailable(Exception e) {
-
-                Toast.makeText(MainActivity.this, "Sorry, music is not available to you right now", Toast.LENGTH_LONG).show();
-            }
-        });
 
 
     }
@@ -111,6 +96,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        FeedPlayerService.getInstance(new FeedAudioPlayer.AvailabilityListener() {
+
+            @Override
+            public void onPlayerAvailable(FeedAudioPlayer feedAudioPlayer) {
+
+                findViewById(R.id.openButtons).setVisibility(View.VISIBLE);
+
+                ((TextView)findViewById(R.id.helloText)).setText("Music Available!");
+            }
+
+            @Override
+            public void onPlayerUnavailable(Exception e) {
+                ((TextView)findViewById(R.id.helloText)).setText("Sorry, music is not available for you right now");
+                Toast.makeText(MainActivity.this, "Sorry, music is not available for you right now "+ e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
