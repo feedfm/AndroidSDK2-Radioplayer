@@ -19,14 +19,14 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
 
-    /*repositories {
+    repositories {
         mavenCentral()
 
         // needed for the feed.fm player-sdk:
         maven {
             url "https://oss.sonatype.org/content/repositories/snapshots"
         }
-    }*/
+    }
 
     defaultConfig {
         applicationId "fm.feed.android.radioplayer"

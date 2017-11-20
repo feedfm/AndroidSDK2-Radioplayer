@@ -88,9 +88,6 @@ public class MainActivity extends AppCompatActivity {
 
         // make buttons visible if radio is available
 
-
-
-
     }
 
     @Override
