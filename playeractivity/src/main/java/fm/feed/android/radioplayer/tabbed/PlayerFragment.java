@@ -244,10 +244,10 @@ public class PlayerFragment extends Fragment {
         mTuningView = rootView.findViewById(R.id.tuningView);
         mPlayerControlsView = rootView.findViewById(R.id.playerControlsView);
 
-        mBackgroundImageView = rootView.findViewById(R.id.backgroundImageView);
-        mProgressBar = rootView.findViewById(R.id.progressBar);
+        mBackgroundImageView = (ImageView) rootView.findViewById(R.id.backgroundImageView);
+        mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
 
-        skipButton = rootView.findViewById(R.id.skipButton);
+        skipButton = (ImageButton) rootView.findViewById(R.id.skipButton);
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -255,7 +255,7 @@ public class PlayerFragment extends Fragment {
                 mPlayer.skip();
             }
         });
-        likeButton = rootView.findViewById(R.id.likeButton);
+        likeButton = (ImageButton) rootView.findViewById(R.id.likeButton);
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -268,7 +268,7 @@ public class PlayerFragment extends Fragment {
                 }
             }
         });
-        dislikeButton = rootView.findViewById(R.id.dislikeButton);
+        dislikeButton = (ImageButton) rootView.findViewById(R.id.dislikeButton);
         dislikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -281,7 +281,7 @@ public class PlayerFragment extends Fragment {
                 }
             }
         });
-        playPauseButton = rootView.findViewById(R.id.playButton);
+        playPauseButton = (ImageButton) rootView.findViewById(R.id.playButton);
         playPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -292,10 +292,10 @@ public class PlayerFragment extends Fragment {
                 }
             }
         });
-        trackText = rootView.findViewById(R.id.trackText);
-        ArtistText = rootView.findViewById(R.id.artistText);
-        elapsedText = rootView.findViewById(R.id.elapsedTextView);
-        remainingTextView = rootView.findViewById(R.id.remainingTextView);
+        trackText = (TextView) rootView.findViewById(R.id.trackText);
+        ArtistText = (TextView) rootView.findViewById(R.id.artistText);
+        elapsedText = (TextView) rootView.findViewById(R.id.elapsedTextView);
+        remainingTextView = (TextView) rootView.findViewById(R.id.remainingTextView);
 
         // station description
         TextView description = (TextView) rootView.findViewById(R.id.description);
@@ -312,7 +312,7 @@ public class PlayerFragment extends Fragment {
 
         // clicking on this button will now start playback
         // in this station
-        sb = rootView.findViewById(R.id.startButton);
+        sb = (ImageButton) rootView.findViewById(R.id.startButton);
         sb.setOnClickListener(onClickStationButton);
 
         assignBackground();

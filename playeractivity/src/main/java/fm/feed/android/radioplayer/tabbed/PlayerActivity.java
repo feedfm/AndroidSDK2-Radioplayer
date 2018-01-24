@@ -60,7 +60,7 @@ public class PlayerActivity extends AppCompatActivity implements PlayerFragment.
             Log.e(TAG, "Please assign a theme to this activity with no action bar.");
         }
 
-        Toolbar mToolbar = findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         ActionBar ab = getSupportActionBar();
@@ -101,10 +101,10 @@ public class PlayerActivity extends AppCompatActivity implements PlayerFragment.
                 mVisibleStations = collectStations();
                 int selectedTabIndex = selectDefaultStation(mVisibleStations);
 
-                mViewPager = findViewById(R.id.playerContainer);
+                mViewPager = (ViewPager) findViewById(R.id.playerContainer);
                 mViewPager.setAdapter(new PlayerFragmentStatePagerAdapter(getSupportFragmentManager(), mVisibleStations, PlayerActivity.this));
 
-                mTabs = findViewById(R.id.radioTabs);
+                mTabs = (TabLayout) findViewById(R.id.radioTabs);
                 if (mVisibleStations.length > 1) {
                     for (Station station : mVisibleStations) {
                         mTabs.addTab(mTabs.newTab().setText(station.getName()));

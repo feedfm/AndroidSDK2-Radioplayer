@@ -15,7 +15,7 @@ public class Application extends android.app.Application {
         Fabric.with(this, new Crashlytics());
 
         // initialize player
-        FeedPlayerService.initialize(this, "sdkdemo", "sdkdemo");
+        FeedPlayerService.initialize(getApplicationContext(),"35953db2c82c4956bc2053bb1425282851f6be67", "581fb939e63be7925b9c4c9518566e274a0b9de0");
     }
 
 }
