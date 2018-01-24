@@ -98,6 +98,7 @@ public class PlayerFragment extends Fragment {
         @Override
         public void onStateChanged(FeedAudioPlayer.State state) {
 
+
             displayMetadataGroupOrNot();
             if(state == FeedAudioPlayer.State.PLAYING)
             {
@@ -190,48 +191,64 @@ public class PlayerFragment extends Fragment {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+
+            FeedPlayerService.getInstance(new FeedAudioPlayer.AvailabilityListener() {
+                @Override
+                public void onPlayerAvailable(FeedAudioPlayer feedAudioPlayer) {
+
+                    mPlayer = feedAudioPlayer;
+                    Bundle args = getArguments();
+                    if (args != null) {
+
+                        String stationName = args.getString(EXTRA_STATION_NAME);
+                        mStation = PlayerActivity.getStationWithName(stationName, mPlayer.getStationList());
+
+                        if (mStation == null) {
+                            Log.w(TAG, "PlayerFragment created with station name '" + stationName + "', but no such station exists");
+                            // default to active station to keep this boat floatin'
+                            mStation = mPlayer.getActiveStation();
+                        }
+
+
+                        mPlayer.prepareToPlay(new FeedAudioPlayer.MusicQueuedListener() {
+                        @Override
+                        public void onMusicQueued() {
+                            //mPlayer.pause();
+                        }
+                        });
+                        mPlayer.prepareNextStation(mStation);
+                        FeedAudioPlayer.State state = mPlayer.getState();
+                        mUserInteraction = (state != FeedAudioPlayer.State.READY_TO_PLAY) && (state != FeedAudioPlayer.State.STALLED);
+                        assignBackground();
+
+                        registerListeners();
+                        areListenersRegistered = true;
+                        displayMetadataGroupOrNot();
+                    }
+                }
+
+                @Override
+                public void onPlayerUnavailable(Exception e) {
+
+                }
+            });
+        }
+
+        if(mStation != null)
+        {
+            assignBackground();
+        }
+        displayMetadataGroupOrNot();
+
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FeedPlayerService.getInstance(new FeedAudioPlayer.AvailabilityListener() {
-            @Override
-            public void onPlayerAvailable(FeedAudioPlayer feedAudioPlayer) {
-
-                mPlayer = feedAudioPlayer;
-                Bundle args = getArguments();
-                if (args != null) {
-
-                    String stationName = args.getString(EXTRA_STATION_NAME);
-                    mStation = PlayerActivity.getStationWithName(stationName, mPlayer.getStationList());
-
-                    if (mStation == null) {
-                        Log.w(TAG, "PlayerFragment created with station name '" + stationName + "', but no such station exists");
-                        // default to active station to keep this boat floatin'
-                        mStation = mPlayer.getActiveStation();
-                    }
-
-                    mPlayer.prepareToPlay(new FeedAudioPlayer.MusicQueuedListener() {
-                        @Override
-                        public void onMusicQueued() {
-                            // ignore
-                        }
-                    });
-
-                    FeedAudioPlayer.State state = mPlayer.getState();
-                    mUserInteraction = (state != FeedAudioPlayer.State.READY_TO_PLAY) && (state != FeedAudioPlayer.State.STALLED);
-                    assignBackground();
-
-                    registerListeners();
-                    areListenersRegistered = true;
-                    displayMetadataGroupOrNot();
-                }
-            }
-
-            @Override
-            public void onPlayerUnavailable(Exception e) {
-
-            }
-        });
 
     }
 
@@ -299,12 +316,8 @@ public class PlayerFragment extends Fragment {
 
         // station description
         TextView description = (TextView) rootView.findViewById(R.id.description);
-        Object dt = mStation.getOption("description");
-        if (dt == null) {
-            dt = "Tune in!";
-        }
 
-        description.setText((String) dt);
+        description.setText((String) "Tune in!");
 
         // 'powered by feed.fm' link
         Button poweredByText = (Button) rootView.findViewById(R.id.powered_by);
@@ -315,8 +328,6 @@ public class PlayerFragment extends Fragment {
         sb = (ImageButton) rootView.findViewById(R.id.startButton);
         sb.setOnClickListener(onClickStationButton);
 
-        assignBackground();
-        displayMetadataGroupOrNot();
         //sb.(mStation.getName());
 
         return rootView;
@@ -358,22 +369,32 @@ public class PlayerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        registerListeners();
-        assignBackground();
-        if(mPlayer.getCurrentPlay()!=null) {
-            stateListener.onStateChanged(mPlayer.getState());
-            trackText.setText(mPlayer.getCurrentPlay().getAudioFile().getTrack().getTitle());
-            ArtistText.setText(mPlayer.getCurrentPlay().getAudioFile().getArtist().getName());
-            likeStatusChangeListener.onLikeStatusChanged(mPlayer.getCurrentPlay().getAudioFile());
+        if(mPlayer!= null)
+        {
+            registerListeners();
+            if(mPlayer.getCurrentPlay()!=null) {
+                stateListener.onStateChanged(mPlayer.getState());
+                trackText.setText(mPlayer.getCurrentPlay().getAudioFile().getTrack().getTitle());
+                ArtistText.setText(mPlayer.getCurrentPlay().getAudioFile().getArtist().getName());
+                likeStatusChangeListener.onLikeStatusChanged(mPlayer.getCurrentPlay().getAudioFile());
+            }
         }
-        displayMetadataGroupOrNot();
+        if(mStation != null)
+        {
+            assignBackground();
+
+            displayMetadataGroupOrNot();
+        }
+
         // update the view when we switch stations
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        unregisterListeners();
+        if(mPlayer!= null) {
+            unregisterListeners();
+        }
     }
 
     /**
