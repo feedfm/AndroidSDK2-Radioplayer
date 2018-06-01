@@ -219,7 +219,6 @@ public class PlayerFragment extends Fragment {
                             //mPlayer.pause();
                         }
                         });
-                        mPlayer.prepareNextStation(mStation);
                         FeedAudioPlayer.State state = mPlayer.getState();
                         mUserInteraction = (state != FeedAudioPlayer.State.READY_TO_PLAY) && (state != FeedAudioPlayer.State.STALLED);
                         assignBackground();
@@ -483,8 +482,13 @@ public class PlayerFragment extends Fragment {
 
         if (bgUrl != null && mBackgroundImageView != null) {
 
-            Glide.with(this).load(bgUrl).centerCrop().into(mBackgroundImageView);
-
+            try {
+                Glide.with(this).load(bgUrl).centerCrop().into(mBackgroundImageView);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         } else if(mBackgroundImageView != null){
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.default_station_background);
 

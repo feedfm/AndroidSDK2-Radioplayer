@@ -15,3 +15,5 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+# FeedSDK
+# -keep public class fm.feed.android.** { *; }
