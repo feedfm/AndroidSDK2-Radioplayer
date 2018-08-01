@@ -1,12 +1,9 @@
+*.iml
 .gradle
 /local.properties
-/.idea/
-/.gradle/
-/.idea/workspace.xml
-/.idea/libraries
+/.idea
 .DS_Store
 /build
-/projectFilesBackup
-*.bin
+/captures
 *.bin
 *.lock
