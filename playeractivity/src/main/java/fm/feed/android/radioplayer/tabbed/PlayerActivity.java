@@ -7,15 +7,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -90,7 +91,7 @@ public class PlayerActivity extends AppCompatActivity implements PlayerFragment.
                 .setArtistTextId(R.id.notification_track_artist)
                 .setReleaseTextId(R.id.notification_track_release);
 
-        FeedPlayerService.getInstance(new FeedAudioPlayer.AvailabilityListener() {
+        FeedPlayerService.getInstance(new AvailabilityListener() {
             @Override
             public void onPlayerAvailable(FeedAudioPlayer feedAudioPlayer) {
 
@@ -269,7 +270,7 @@ public class PlayerActivity extends AppCompatActivity implements PlayerFragment.
         Log.d(TAG, "fragment for station - activity resuming");
 
         // update the station selection buttons based on the current station
-        FeedPlayerService.getInstance(new FeedAudioPlayer.AvailabilityListener() {
+        FeedPlayerService.getInstance(new AvailabilityListener() {
             @Override
             public void onPlayerAvailable(FeedAudioPlayer feedAudioPlayer) {
                 setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -295,11 +296,11 @@ public class PlayerActivity extends AppCompatActivity implements PlayerFragment.
     public void onStationStartedPlayback(Station station) {
         Log.d(TAG, "updating notification_small intent to point to " + station.getName());
 
-        Intent ai = new Intent(getIntent());
-        ai.putExtra(EXTRA_DEFAULT_STATION, station.getName());
-        ai.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, ai, PendingIntent.FLAG_CANCEL_CURRENT);
-        mPlayer.setPendingIntent(pi);
+//        Intent ai = new Intent(getIntent());
+//        ai.putExtra(EXTRA_DEFAULT_STATION, station.getName());
+//        ai.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        PendingIntent pi = PendingIntent.getActivity(this, 0, ai, PendingIntent.FLAG_CANCEL_CURRENT);
+//        mPlayer.setPendingIntent(pi);
     }
 
     @Override

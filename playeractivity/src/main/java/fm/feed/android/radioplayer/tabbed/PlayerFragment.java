@@ -7,12 +7,10 @@ package fm.feed.android.radioplayer.tabbed;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,8 +25,6 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.text.NumberFormat;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import fm.feed.android.playersdk.*;
 import fm.feed.android.playersdk.models.AudioFile;
@@ -94,17 +90,17 @@ public class PlayerFragment extends Fragment {
      * the displayed metadata.
      */
 
-    FeedAudioPlayer.StateListener stateListener = new FeedAudioPlayer.StateListener() {
+    StateListener stateListener = new StateListener() {
         @Override
-        public void onStateChanged(FeedAudioPlayer.State state) {
+        public void onStateChanged(State state) {
 
 
             displayMetadataGroupOrNot();
-            if(state == FeedAudioPlayer.State.PLAYING)
+            if(state == State.PLAYING)
             {
                 playPauseButton.setImageResource(R.drawable.feedfm_ic_pause_36dp);
             }
-            else if(state == FeedAudioPlayer.State.PAUSED)
+            else if(state == State.PAUSED)
             {
                 playPauseButton.setImageResource(R.drawable.feedfm_ic_play_36dp);
             }
@@ -112,7 +108,7 @@ public class PlayerFragment extends Fragment {
         }
     };
 
-    FeedAudioPlayer.PlayListener playListener = new FeedAudioPlayer.PlayListener() {
+    PlayListener playListener = new PlayListener() {
 
         @Override
         public void onSkipStatusChanged(boolean b) {
@@ -147,7 +143,7 @@ public class PlayerFragment extends Fragment {
         }
     };
 
-    FeedAudioPlayer.LikeStatusChangeListener likeStatusChangeListener = new FeedAudioPlayer.LikeStatusChangeListener() {
+    LikeStatusChangeListener likeStatusChangeListener = new LikeStatusChangeListener() {
         @Override
         public void onLikeStatusChanged(AudioFile audioFile) {
             if (audioFile.isDisliked()) {
@@ -195,7 +191,7 @@ public class PlayerFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
 
-            FeedPlayerService.getInstance(new FeedAudioPlayer.AvailabilityListener() {
+            FeedPlayerService.getInstance(new AvailabilityListener() {
                 @Override
                 public void onPlayerAvailable(FeedAudioPlayer feedAudioPlayer) {
 
@@ -213,14 +209,8 @@ public class PlayerFragment extends Fragment {
                         }
 
 
-                        mPlayer.prepareToPlay(new FeedAudioPlayer.MusicQueuedListener() {
-                        @Override
-                        public void onMusicQueued() {
-                            //mPlayer.pause();
-                        }
-                        });
-                        FeedAudioPlayer.State state = mPlayer.getState();
-                        mUserInteraction = (state != FeedAudioPlayer.State.READY_TO_PLAY) && (state != FeedAudioPlayer.State.STALLED);
+                        State state = mPlayer.getState();
+                        mUserInteraction = (state != State.READY_TO_PLAY) && (state != State.STALLED);
                         assignBackground();
 
                         registerListeners();
@@ -301,9 +291,9 @@ public class PlayerFragment extends Fragment {
         playPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mPlayer.getState() != FeedAudioPlayer.State.PLAYING) {
+                if (mPlayer.getState() != State.PLAYING) {
                     mPlayer.play();
-                } else if (mPlayer.getState() == FeedAudioPlayer.State.PLAYING) {
+                } else if (mPlayer.getState() == State.PLAYING) {
                     mPlayer.pause();
                 }
             }
@@ -348,7 +338,7 @@ public class PlayerFragment extends Fragment {
             if (mPlayerFragmentEventListener != null) {
                 if(mPlayer != null)
                 {
-                    mPlayer.setActiveStation(mStation);
+                    mPlayer.setActiveStation(mStation, true);
                     mPlayer.play();
                     mPlayerFragmentEventListener.onStationStartedPlayback(mStation);
                 }
@@ -356,7 +346,7 @@ public class PlayerFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener onClickPoweredByText = new View.OnClickListener() {
+    private final View.OnClickListener onClickPoweredByText = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (mPlayerFragmentEventListener != null) {
@@ -423,14 +413,14 @@ public class PlayerFragment extends Fragment {
             return;
         }
         Station station = mPlayer.getActiveStation();
-        FeedAudioPlayer.State state = mPlayer.getState();
+        State state = mPlayer.getState();
 
         Log.i(TAG, "determining metadata display, state is " + state.name());
 
         if (!mUserInteraction
                 || (station == null)
-                || (state == FeedAudioPlayer.State.READY_TO_PLAY)
-                || (state == FeedAudioPlayer.State.WAITING_FOR_ITEM)) {
+                || (state == State.READY_TO_PLAY)
+                || (state == State.WAITING_FOR_ITEM)) {
             Log.i(TAG, "showing tune in text, state is " + state);
 
             // display 'tune in! text
@@ -448,7 +438,7 @@ public class PlayerFragment extends Fragment {
             mPlayerControlsView.setVisibility(View.INVISIBLE);
             mProgressBar.setVisibility(View.INVISIBLE);
 
-        } else if (state == FeedAudioPlayer.State.STALLED) {
+        } else if (state == State.STALLED) {
             Log.i(TAG,"showing 'tuning...' text since we're tuning");
 
             // show tuning text if that's what we're doing
@@ -457,7 +447,7 @@ public class PlayerFragment extends Fragment {
             mPlayerControlsView.setVisibility(View.INVISIBLE);
             mProgressBar.setVisibility(View.INVISIBLE);
 
-        } else if(state == FeedAudioPlayer.State.PLAYING || state == FeedAudioPlayer.State.PAUSED){
+        } else if(state == State.PLAYING || state == State.PAUSED){
             Log.i(TAG, "showing controls");
 
             // display controls
@@ -483,7 +473,7 @@ public class PlayerFragment extends Fragment {
         if (bgUrl != null && mBackgroundImageView != null) {
 
             try {
-                Glide.with(this).load(bgUrl).centerCrop().into(mBackgroundImageView);
+                Glide.with(getContext()).load(bgUrl).centerCrop().into(mBackgroundImageView);
             }
             catch (Exception e)
             {
@@ -507,18 +497,18 @@ public class PlayerFragment extends Fragment {
 
         if (bgUrl != null) {
 
-            Glide.with(this).load(bgUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
+            Glide.with(getContext()).load(bgUrl).asBitmap().into(new SimpleTarget<Bitmap>() {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                     // set this image for the lockscreen and notifications if we're
                     // playing this station
-                    mPlayer.setArtwork(resource);
+
                 }
             });
         } else {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.default_station_background);
 
-            mPlayer.setArtwork(bm);
+            //mPlayer.setArtwork(bm);
         }
     }
 

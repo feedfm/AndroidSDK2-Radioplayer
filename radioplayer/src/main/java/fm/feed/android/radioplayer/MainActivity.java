@@ -6,9 +6,9 @@ package fm.feed.android.radioplayer;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,10 +16,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 
+import fm.feed.android.playersdk.AvailabilityListener;
 import fm.feed.android.playersdk.FeedAudioPlayer;
 import fm.feed.android.playersdk.FeedPlayerService;
 import fm.feed.android.radioplayer.tabbed.PlayerActivity;
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        FeedPlayerService.getInstance(new FeedAudioPlayer.AvailabilityListener() {
+        FeedPlayerService.getInstance(new AvailabilityListener() {
 
             @Override
             public void onPlayerAvailable(FeedAudioPlayer feedAudioPlayer) {

@@ -184,6 +184,7 @@
                         android:layout_marginRight="27dp"
                         android:layout_height="36dp"
                         android:src="@drawable/feedfm_btn_thumbsdown_36dp"
+                        android:tint="@android:color/white"
                         android:scaleType="fitCenter"
                         android:background="@android:color/transparent"
                         />
@@ -201,6 +202,7 @@
                         android:layout_marginRight="22dp"
                         android:layout_height="36dp"
                         android:src="@drawable/feedfm_btn_thumbsup_36dp"
+                        android:tint="@android:color/white"
                         android:scaleType="fitCenter"
                         android:background="@android:color/transparent"
                         />
@@ -218,6 +220,7 @@
                         android:layout_marginRight="24dp"
                         android:layout_height="36dp"
                         android:src="@drawable/feedfm_ic_play_36dp"
+                        android:tint="@android:color/white"
                         android:scaleType="fitCenter"
                         android:background="@android:color/transparent"
                         />
@@ -234,6 +237,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_height="36dp"
                         android:src="@drawable/feedfm_btn_skip_36dp"
+                        android:tint="@android:color/white"
                         android:scaleType="fitCenter"
                         android:background="@android:color/transparent"
                         />
