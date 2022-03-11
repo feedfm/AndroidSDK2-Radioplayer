@@ -20,9 +20,7 @@ allprojects {
         google()
 
         // needed for the feed.fm player-sdk:
-        maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots"
-        }
+        maven { url 'https://jitpack.io' }
     }
 }
 

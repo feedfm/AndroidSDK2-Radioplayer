@@ -12,7 +12,7 @@ public class Application extends android.app.Application {
         super.onCreate();
 
         // initialize player
-        FeedPlayerService.initialize(getApplicationContext(),"demo", "demo");
+        FeedPlayerService.initialize(getApplicationContext(),"sdkdemo", "sdkdemo");
     }
 
 }
