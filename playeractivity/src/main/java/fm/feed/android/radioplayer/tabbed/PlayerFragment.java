@@ -7,6 +7,8 @@ package fm.feed.android.radioplayer.tabbed;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.util.Log;
@@ -116,7 +118,7 @@ public class PlayerFragment extends Fragment {
         }
 
         @Override
-        public void onProgressUpdate(Play play, float elapsedTime, float duration) {
+        public void onProgressUpdate(@NonNull Play play, float elapsedTime, float duration) {
 
             long elapsedMinutes = (long) elapsedTime / 60;
             int elapsedSeconds = (int) elapsedTime % 60;
@@ -141,6 +143,12 @@ public class PlayerFragment extends Fragment {
             likeStatusChangeListener.onLikeStatusChanged(play.getAudioFile());
             displayMetadataGroupOrNot();
         }
+        @Override
+        public void onPlayerError(FeedFMError error){
+
+        }
+
+
     };
 
     LikeStatusChangeListener likeStatusChangeListener = new LikeStatusChangeListener() {
