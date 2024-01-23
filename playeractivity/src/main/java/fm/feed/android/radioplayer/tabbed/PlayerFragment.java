@@ -437,7 +437,7 @@ public class PlayerFragment extends Fragment {
             mPlayerControlsView.setVisibility(View.INVISIBLE);
             mProgressBar.setVisibility(View.INVISIBLE);
 
-        } else if (!station.getId().equals(mStation.getId())) {
+        } else if (!station.getTempId().equals(mStation.getTempId())) {
             Log.i(TAG, "showing tune in text, since station does not match");
 
             // display controls for non-tuned in stations

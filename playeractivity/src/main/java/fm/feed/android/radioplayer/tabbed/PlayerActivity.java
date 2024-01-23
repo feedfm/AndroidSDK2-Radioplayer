@@ -249,7 +249,7 @@ public class PlayerActivity extends AppCompatActivity implements PlayerFragment.
         for (int i = 0; i < stations.length; i++) {
             Station station = stations[i];
 
-            if (station.getId().equals(activeStation.getId())) {
+            if (station.getTempId().equals(activeStation.getTempId())) {
                 activeStationTabIndex = i;
             }
 
